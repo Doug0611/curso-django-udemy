@@ -1,0 +1,18 @@
+{% include 'recipes/partials/_head.html' %}
+
+<body>
+   {% include 'recipes/partials/_header.html' %}
+
+   {% include 'recipes/partials/_search.html'%}
+
+   <main class="main-content-container">
+       <div class="main-content main-content-list container">
+            {% include 'recipes/partials/_card-recipe.html' %}
+            {% comment %} {% include 'recipes/partials/_card-recipe.html' %} {% endcomment %}
+            {% comment %} {% include 'recipes/partials/_card-recipe.html' %} {% endcomment %}
+       </div>
+   </main>
+
+   {% include 'recipes/partials/_footer.html' %}
+</body>
+</html>
