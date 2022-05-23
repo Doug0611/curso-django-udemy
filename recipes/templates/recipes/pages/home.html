@@ -1,18 +1,14 @@
-{% include 'recipes/partials/_head.html' %}
+{% extends 'global/base.html' %}
 
-<body>
-   {% include 'recipes/partials/_header.html' %}
+{% block title %}Home{% endblock title %}
 
-   {% include 'recipes/partials/_search.html'%}
+{% block content %}
+<main class="main-content-container">
+    <div class="main-content main-content-list container">
+        {% include 'recipes/partials/_card-recipe.html' %}
+    </div>
+</main>
+{% endblock content %}
 
-   <main class="main-content-container">
-       <div class="main-content main-content-list container">
-            {% include 'recipes/partials/_card-recipe.html' %}
-            {% comment %} {% include 'recipes/partials/_card-recipe.html' %} {% endcomment %}
-            {% comment %} {% include 'recipes/partials/_card-recipe.html' %} {% endcomment %}
-       </div>
-   </main>
 
-   {% include 'recipes/partials/_footer.html' %}
-</body>
-</html>
+
