@@ -1,40 +1,49 @@
 <div class="recipe recipe-list-item">
-    <div class="recipe-cover">
-        <img src="https://mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saud%C3%A1vel-que-nada-brasileiro-gosta-de-fast-food.jpg" alt="">
+    <div class="recipe-cover">   
+        <a href="{% url 'recipes:recipe' id=recipe.id %}">
+            <img src="{{ recipe.cover.url }}" alt="">   
+        </a> 
     </div>
     <div class="recipe-title-container">
-        <h2 class="recipe-title">lorem ipsum dolor sit</h2>
+        <h2 class="recipe-title">{{ recipe.title | title }}</h2>
     </div>
     <div class="recipe-author">
-        <span class="recipe-author-item"><i class="fa fa-solid fa-user"></i>Douglas Sales</span>
-        <span class="recipe-author-item"><i class="fa fa-solid fa-calendar-days"></i>18/05/2022</span>
+        <span class="recipe-author-item"><i class="fa fa-solid fa-user"></i>{{ recipe.auth.first_name }} {{ recipe.auth.last_name }}</span>
+        <span class="recipe-author-item"><i class="fa fa-solid fa-calendar-days"></i>{{ recipe.create_at | date:"d/m/Y" }}</span>
         <span class="recipe-author-item">
             <a href="#">
-                <i class="fa fa-solid fa-layer-group"></i>café da manhã
+                <i class="fa fa-solid fa-layer-group"></i>{{ recipe.category.name }}
             </a>
+
         </span>
     </div>
     <div class="recipe-content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit natus ipsa dolores repudiandae veritatis beatae fugit ab quibusdam soluta ducimus omnis corporis magni iste, voluptates voluptas provident iusto sint excepturi.</p>
+        {% if is_datail_page is True %}
+            <p>{{ recipe.preparation_steps | linebreaksbr }}</p>
+        {% else %}
+            <p>{{ recipe.description }}</p>
+        {% endif %}
     </div>
     <div class="recipe-meta-container">
         <div class="recipe-meta recipe-preparation">
             <h3 class="recipe-meta-title"><i class="fa-solid fa-stopwatch"></i> Preparo</h3>
             <div class="recipe-meta-text">
-                0 minutos
+                {{ recipe.preparation_time }} {{ recipe.preparation_time_unit }}
             </div>
         </div>
         <div class="recipe-meta recipe-servings">
             <h3 class="recipe-meta-title"><i class="fa-solid fa-pizza-slice"></i> Porções</h3>
             <div class="recipe-meta-text">
-                0 porções
+                {{ recipe.servings }} {{ recipe.servings_unit }}
             </div>
         </div>
     </div>
-    <footer class="recipe-footer">
-        <a href="" class="recipe-read-more button butoon-dark button-full-width">
-            <i class="fa fa-solid fa-eye"></i>
-            <span>ver mais...</span>
-        </a>
-    </footer>
+    {% if is_datail_page is not True %}
+        <footer class="recipe-footer">
+            <a href="{% url 'recipes:recipe' id=recipe.id %}" class="recipe-read-more button butoon-dark button-full-width">
+                <i class="fa fa-solid fa-eye"></i>
+                <span>ver mais...</span>
+            </a>
+        </footer>
+    {% endif %}
 </div>
